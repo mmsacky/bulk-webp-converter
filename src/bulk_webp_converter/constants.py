@@ -9,7 +9,7 @@ MEDIUM = 60
 HIGH = 90
 LOSSLESS = 100
 
-# Compatable Image Formats
+# Compatible Image Formats
 JPG = ".jpg"
 PNG = ".png"
 GIF = ".gif"

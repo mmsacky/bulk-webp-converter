@@ -3,6 +3,7 @@ from rich.console import Console
 from pathlib import Path
 from constants import DEST_FOLDER
 from convert_image import convert_img
+from check_directory import has_no_valid_images, create_destination_directory
 
 
 def main():
@@ -15,9 +16,21 @@ def main():
     ).ask()
 
     src_dir = Path(src_dir_path)
-    dest_dir = src_dir / DEST_FOLDER
 
-    dest_dir.mkdir(parents=True, exist_ok=True)
+    try:
+
+        if not has_no_valid_images(src_dir):
+            dest_dir = src_dir / DEST_FOLDER
+            create_destination_directory(dest_dir)
+        else:
+            console.print(
+                "[bold red]Error encountered: Folder has no valid images[/bold red]"
+            )
+            return
+
+    except NotADirectoryError as e:
+        console.print(f"[bold red]Error encountered: {e} [/bold red]")
+        return
 
     time.sleep(0.8)
 

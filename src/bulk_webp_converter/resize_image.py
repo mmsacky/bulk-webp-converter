@@ -3,10 +3,11 @@ from pathlib import Path
 from rich.console import Console
 from constants import LS_MAX_WIDTH, PORT_MAX_WIDTH, SQ_MAX_WIDTH
 
+console = Console()
+
 
 def resize_img(image):
 
-    console = Console()
     file_name = Path(image.filename).stem
 
     aspect_ratio = image.height / image.width
