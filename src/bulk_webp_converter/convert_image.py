@@ -4,11 +4,11 @@ from rich.progress import track
 from enum import Enum
 from PIL import Image, UnidentifiedImageError
 from pathlib import Path
-from constants import LOW, MEDIUM, HIGH, LOSSLESS, JPG, PNG, GIF, YES, NO
-from resize_image import resize_img
-from key_binding import quality_key_bind
+from .constants import LOW, MEDIUM, HIGH, LOSSLESS, JPG, PNG, GIF, YES, NO
+from .resize_image import resize_img
+from .key_binding import quality_key_bind
 
-console = Console(force_terminal=True)
+console = Console()
 
 
 class Quality(Enum):
@@ -47,7 +47,7 @@ def convert_img(src_dir, dest_dir):
         is_lossless = False
 
     rename_choice = questionary.select(
-        "Whould you like to rename your images: ",
+        "Would you like to rename your images: ",
         choices=[YES, NO],
     ).ask()
 
@@ -60,10 +60,7 @@ def convert_img(src_dir, dest_dir):
         ).ask()
 
     for img_file in track(
-        src_dir.iterdir(),
-        description="[yellow]Processing images...",
-        style="black on #222222",
-        complete_style="bold green",
+        src_dir.iterdir(), description="[bold yellow]Processing images...[/bold yellow]"
     ):
 
         if (
@@ -86,11 +83,11 @@ def convert_img(src_dir, dest_dir):
                     else:
                         file_number += 1
                         file_name = f"{custom_file_name}_{file_number:02d}"
-                        console.log(
+                        console.print(
                             f"[bold yellow]✍ Renaming[/bold yellow]    | [dim]{current_img_name}[/dim] → [bold white]{file_name}[/bold white]"
                         )
 
-                    console.log(
+                    console.print(
                         f"[bold blue]⚡ Converting[/bold blue]   | [dim]{file_name}[/dim] to WebP..."
                     )
 
@@ -101,7 +98,7 @@ def convert_img(src_dir, dest_dir):
                         lossless=is_lossless,
                         quality=quality_choice,
                     )
-                    console.log(
+                    console.print(
                         f"[bold green]✔ Success[/bold green]   | Converted [bold white]{file_name}[/bold white]!"
                     )
                     time.sleep(0.5)

@@ -1,4 +1,4 @@
-from constants import JPG, PNG, GIF, DEST_FOLDER
+from .constants import JPG, PNG, GIF, DEST_FOLDER
 from rich.console import Console
 
 console = Console()

@@ -4,7 +4,10 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bulk-webp-converter"
-version = "0.1.0"
+version = "1.0.0"
 description = "A local batch image processor designed to resize, rename, and convert large images into web-ready WebP formats."
 requires-python = ">=3.10"
 dependencies = ["Pillow", "questionary", "prompt_toolkit", "rich"]
+
+[project.scripts]
+bulk-webp-converter = "bulk_webp_converter.main:main"

@@ -1,13 +1,15 @@
 import questionary, time
 from rich.console import Console
 from pathlib import Path
-from constants import DEST_FOLDER
-from convert_image import convert_img
-from check_directory import has_no_valid_images, create_destination_directory
+from .constants import DEST_FOLDER
+from .convert_image import convert_img
+from .check_directory import has_no_valid_images, create_destination_directory
+
+console = Console()
 
 
 def main():
-    console = Console()
+
     console.print("[bold cyan]🤖 Starting batch image processor...[/bold cyan]")
     time.sleep(0.8)
 
